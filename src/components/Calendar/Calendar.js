@@ -25,6 +25,7 @@ class CalendarWrapper extends Component {
           calendarType={'US'}
           className={classes.calendar}
           onChange={this.handleChange}
+          onClickDay={this.props.onClickDay}
           value={this.state.date}
         />
       </div>
