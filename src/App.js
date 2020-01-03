@@ -1,27 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { Spinner } from './components/UI';
 
-import { Button } from './components/UI';
 import './App.css';
+
+// Routes
+const Home = React.lazy(() => import('./containers/Home'));
+const ReminderForm = React.lazy(() =>
+  import('./containers/ReminderForm/ReminderForm')
+);
 
 const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Button>Click me!</Button>
-
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
+      <React.Suspense fallback={<Spinner />}>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/reminder" component={ReminderForm} />
+          <Redirect to="/" />
+        </Switch>
+      </React.Suspense>
     </div>
   );
 };
