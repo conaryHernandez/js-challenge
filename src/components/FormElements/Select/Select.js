@@ -7,35 +7,14 @@ const Select = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and alse replace ErrorMessage entirely.
   const [field, meta] = useField(props);
-  const inputClasses = [
-    classes.input,
-    meta.error && meta.touched ? classes.Invalid : ''
-  ];
-  const errorLabelClasses = [
-    classes['control-label'],
-    meta.error && meta.touched ? classes.Invalid : ''
-  ];
-  const iconClasses = [
-    classes.Icon,
-    meta.error && meta.touched ? classes.Invalid : ''
-  ];
+
+  const errorLabelClasses = [meta.error && meta.touched ? classes.Invalid : ''];
 
   return (
-    <div className={classes['select-wrap']}>
-      <label
-        className={classes['control-label']}
-        htmlFor={props.id || props.name}>
-        {label}
-      </label>
+    <div>
+      <label htmlFor={props.id || props.name}>{label}</label>
 
-      <div className={classes['select-container']}>
-        <select
-          onChange={props.onChange}
-          className={inputClasses.join(' ')}
-          {...field}
-          {...props}
-        />
-      </div>
+      <select onChange={props.onChange} {...field} {...props} />
 
       {meta.touched && meta.error ? (
         <div className={errorLabelClasses.join(' ')}>{meta.error}</div>

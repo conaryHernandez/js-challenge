@@ -5,7 +5,6 @@ import AddReminder from './ReminderModal/ReminderModal';
 class Home extends Component {
   state = {
     visible: false,
-    ModalText: 'Content of the modal',
     confirmLoading: false
   };
 
@@ -24,7 +23,6 @@ class Home extends Component {
 
   handleOk = () => {
     this.setState({
-      ModalText: 'The modal will be closed after two seconds',
       confirmLoading: true
     });
     setTimeout(() => {
@@ -46,7 +44,6 @@ class Home extends Component {
           handleOk={this.handleOk}
           visible={this.state.visible}
           confirmLoading={this.state.confirmLoading}
-          ModalText={this.state.ModalText}
         />
       </Fragment>
     );

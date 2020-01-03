@@ -1,5 +1,6 @@
 import React from 'react';
 import { useField } from 'formik';
+import { Input } from 'antd';
 
 import classes from '../index.module.scss';
 
@@ -8,30 +9,15 @@ const Textarea = ({ label, ...props }) => {
   // which we can spread on <input> and alse replace ErrorMessage entirely.
   const [field, meta] = useField(props);
 
-  const inputClasses = [
-    classes.textarea,
-    classes.input,
-    meta.error && meta.touched ? classes.Invalid : ''
-  ];
-  const errorLabelClasses = [
-    classes['control-label'],
-    meta.error && meta.touched ? classes.Invalid : ''
-  ];
+  const errorLabelClasses = [meta.error && meta.touched ? classes.Invalid : ''];
+
+  const { TextArea } = Input;
 
   return (
-    <div className={classes['input-wrap']}>
-      <label
-        className={classes['control-label']}
-        htmlFor={props.id || props.name}>
-        {label}
-      </label>
+    <div>
+      <label htmlFor={props.id || props.name}>{label}</label>
 
-      <textarea
-        onChange={props.onChange}
-        className={inputClasses.join(' ')}
-        {...field}
-        {...props}
-      />
+      <TextArea rows={4} onChange={props.onChange} {...field} {...props} />
       {meta.touched && meta.error ? (
         <div className={errorLabelClasses.join(' ')}>{meta.error}</div>
       ) : null}
