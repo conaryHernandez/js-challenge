@@ -6,8 +6,6 @@ import moment from 'moment';
 import classes from '../index.module.scss';
 
 const CustomTimePicker = ({ label, ...props }) => {
-  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-  // which we can spread on <input> and alse replace ErrorMessage entirely.
   const [field, meta] = useField(props);
 
   const errorLabelClasses = [meta.error && meta.touched ? classes.Invalid : ''];

@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import Calendar from '../../components/Calendar/Calendar';
-import AddReminder from './ReminderModal/ReminderModal';
+import ReminderModal from './ReminderModal/ReminderModal';
+import moment from 'moment';
 
 class Home extends Component {
   state = {
     visible: false,
-    confirmLoading: false
+    confirmLoading: false,
+    selectedDay: new Date()
   };
 
   showModal = () => {
@@ -33,17 +35,23 @@ class Home extends Component {
     }, 2000);
   };
 
+  handleSelectedDay = date => this.setState({ selectedDay: date });
+
   render() {
     return (
       <Fragment>
-        <h1>Home Page</h1>
-        <Calendar onClickDay={this.showModal} />
+        <h1>My Calendar</h1>
+        <Calendar
+          onClickDay={this.showModal}
+          onSelectedDay={this.handleSelectedDay}
+        />
 
-        <AddReminder
+        <ReminderModal
           handleCancel={this.handleCancel}
           handleOk={this.handleOk}
           visible={this.state.visible}
           confirmLoading={this.state.confirmLoading}
+          selectedDay={this.state.selectedDay}
         />
       </Fragment>
     );

@@ -7,7 +7,7 @@ import { Textarea, Input, TimePicker } from '../../../components/FormElements';
 
 // values => validate(values, this.state.rules)
 
-class AddReminder extends Component {
+class ReminderModal extends Component {
   render() {
     const { confirmLoading, visible, handleOk, handleCancel } = this.props;
 
@@ -16,7 +16,8 @@ class AddReminder extends Component {
         initialValues={{
           title: '',
           description: '',
-          time: moment()
+          time: moment(),
+          day: this.props.selectedDay || ''
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
@@ -42,6 +43,8 @@ class AddReminder extends Component {
             handleSubmit
           } = props;
 
+          console.log('values.day', this.props.selectedDay);
+
           return (
             <Modal
               title="Add New Reminder"
@@ -49,34 +52,39 @@ class AddReminder extends Component {
               onOk={handleSubmit}
               confirmLoading={confirmLoading}
               onCancel={handleCancel}>
-              <div className="form-section">
-                <Form>
-                  <Input
-                    label="Title"
-                    name="title"
-                    type="title"
-                    placeholder="Enter a title"
-                    onChange={handleChange}
-                    value={values.title}
-                    id="title"
-                  />
-                  <Textarea
-                    label="Description"
-                    name="description"
-                    placeholder="Enter a description"
-                    onChange={handleChange}
-                    value={values.description}
-                    id="description"
-                  />
-                  <TimePicker
-                    onChange={handleChange}
-                    label="Time"
-                    name="time"
-                    value={values.time}
-                    id="time"
-                  />
-                </Form>
-              </div>
+              <Form>
+                <Input
+                  label="Title"
+                  name="title"
+                  type="title"
+                  placeholder="Enter a title"
+                  onChange={handleChange}
+                  value={values.title}
+                  id="title"
+                />
+                <Textarea
+                  label="Description"
+                  name="description"
+                  placeholder="Enter a description"
+                  onChange={handleChange}
+                  value={values.description}
+                  id="description"
+                />
+                <TimePicker
+                  onChange={handleChange}
+                  label="Time"
+                  name="time"
+                  value={values.time}
+                  id="time"
+                />
+                <Input
+                  name="day"
+                  type="text"
+                  onChange={handleChange}
+                  value={values.day}
+                  id="day"
+                />
+              </Form>
             </Modal>
           );
         }}
@@ -85,4 +93,4 @@ class AddReminder extends Component {
   }
 }
 
-export default AddReminder;
+export default ReminderModal;

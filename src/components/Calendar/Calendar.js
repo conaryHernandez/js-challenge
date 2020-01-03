@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 
 import classes from './Calendar.module.scss';
-// import ChevronRight from "@material-ui/icons/ChevronRight";
-// import ChevronLeft from "@material-ui/icons/ChevronLeft";
 
 class CalendarWrapper extends Component {
   state = {
@@ -24,7 +22,10 @@ class CalendarWrapper extends Component {
           prev2Label={false}
           calendarType={'US'}
           className={classes.calendar}
-          onChange={this.handleChange}
+          onChange={date => {
+            this.handleChange(date);
+            this.props.onSelectedDay(date);
+          }}
           onClickDay={this.props.onClickDay}
           value={this.state.date}
         />

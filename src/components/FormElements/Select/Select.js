@@ -4,8 +4,6 @@ import { useField } from 'formik';
 import classes from '../index.module.scss';
 
 const Select = ({ label, ...props }) => {
-  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-  // which we can spread on <input> and alse replace ErrorMessage entirely.
   const [field, meta] = useField(props);
 
   const errorLabelClasses = [meta.error && meta.touched ? classes.Invalid : ''];
