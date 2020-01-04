@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import { Button } from 'antd';
 
 import Calendar from '../../components/Calendar/Calendar';
-import ReminderModal from './ReminderModal/ReminderModal';
+import ReminderModal from '../../components/Reminders/ReminderModal/ReminderModal';
+import * as actions from '../../store/actions';
 
 class Home extends Component {
   state = {
@@ -11,6 +13,10 @@ class Home extends Component {
     selectedDay: new Date()
   };
 
+  componentDidUpdate() {
+    console.log('this.props.reminders', this.props.reminders);
+  }
+
   showModal = () => {
     this.setState({
       visible: true
@@ -18,7 +24,6 @@ class Home extends Component {
   };
 
   handleCancel = () => {
-    console.log('Clicked cancel button');
     this.setState({
       visible: false
     });
@@ -52,11 +57,15 @@ class Home extends Component {
           Add Reminder
         </Button>
 
-        <Calendar onChange={e => console.log(e)} />
+        <Calendar
+          onChange={e => console.log(e)}
+          reminders={this.props.reminders}
+        />
 
         <ReminderModal
           handleCancel={this.handleCancel}
           handleOk={this.handleOk}
+          addItem={this.props.onAddReminder}
           visible={this.state.visible}
           confirmLoading={this.state.confirmLoading}
           selectedDay={this.state.selectedDay}
@@ -66,4 +75,16 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    reminders: state.rmd.reminders
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddReminder: data => dispatch(actions.addReminder(data))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

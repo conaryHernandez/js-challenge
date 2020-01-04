@@ -9,7 +9,11 @@ const CustomDatePicker = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   const dateFormat = 'YYYY/MM/DD';
 
-  const errorLabelClasses = [meta.error && meta.touched ? classes.Invalid : ''];
+  const inputClasses = [meta.error && meta.touched ? classes.Invalid : ''];
+
+  const errorLabelClasses = [
+    meta.error && meta.touched ? classes.InvalidText : ''
+  ];
 
   function onChange(date, dateString) {
     const fakeEvent = {
@@ -35,6 +39,7 @@ const CustomDatePicker = ({ label, ...props }) => {
       <DatePicker
         defaultValue={moment('2015/01/01', dateFormat)}
         format={dateFormat}
+        className={inputClasses.join(' ')}
         {...field}
         {...props}
         onChange={onChange}

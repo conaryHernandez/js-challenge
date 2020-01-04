@@ -3,13 +3,14 @@
   color: red;
 }
 
-.select-wrap {
+.InvalidText {
+  color: red;
 }
 
-.select-container {
-}
-
-.input-container {
+:global {
+  .ant-select-auto-complete {
+    border-radius: 0.3rem;
+  }
 }
 
 .control-label {

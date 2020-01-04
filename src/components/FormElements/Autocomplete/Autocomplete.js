@@ -5,8 +5,6 @@ import { AutoComplete, Icon, Input } from 'antd';
 import cities from '../../../assets/cities.json';
 import classes from '../index.module.scss';
 
-console.log(cities);
-
 const { Option } = AutoComplete;
 
 function renderOption(item) {
@@ -23,7 +21,13 @@ function renderOption(item) {
 const CustomAutocomplete = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
-  const errorLabelClasses = [meta.error && meta.touched ? classes.Invalid : ''];
+  const inputClasses = [
+    'certain-category-search',
+    meta.error && meta.touched ? classes.Invalid : ''
+  ];
+  const errorLabelClasses = [
+    meta.error && meta.touched ? classes.InvalidText : ''
+  ];
 
   function onChange(value) {
     const fakeEvent = {
@@ -42,7 +46,7 @@ const CustomAutocomplete = ({ label, ...props }) => {
       <label htmlFor={props.id || props.name}>{label}</label>
 
       <AutoComplete
-        className="certain-category-search"
+        className={inputClasses.join(' ')}
         dropdownClassName="certain-category-search-dropdown"
         dropdownMatchSelectWidth={false}
         dropdownStyle={{ width: 300 }}

@@ -6,13 +6,22 @@ import classes from '../index.module.scss';
 const Select = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
-  const errorLabelClasses = [meta.error && meta.touched ? classes.Invalid : ''];
+  const inputClasses = [meta.error && meta.touched ? classes.Invalid : ''];
+
+  const errorLabelClasses = [
+    meta.error && meta.touched ? classes.InvalidText : ''
+  ];
 
   return (
     <div>
       <label htmlFor={props.id || props.name}>{label}</label>
 
-      <select onChange={props.onChange} {...field} {...props} />
+      <select
+        className={inputClasses.join(' ')}
+        onChange={props.onChange}
+        {...field}
+        {...props}
+      />
 
       {meta.touched && meta.error ? (
         <div className={errorLabelClasses.join(' ')}>{meta.error}</div>

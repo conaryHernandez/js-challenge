@@ -7,7 +7,10 @@ import classes from '../index.module.scss';
 const Textarea = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
-  const errorLabelClasses = [meta.error && meta.touched ? classes.Invalid : ''];
+  const inputClasses = [meta.error && meta.touched ? classes.Invalid : ''];
+  const errorLabelClasses = [
+    meta.error && meta.touched ? classes.InvalidText : ''
+  ];
 
   const { TextArea } = Input;
 
@@ -15,7 +18,13 @@ const Textarea = ({ label, ...props }) => {
     <div>
       <label htmlFor={props.id || props.name}>{label}</label>
 
-      <TextArea rows={4} onChange={props.onChange} {...field} {...props} />
+      <TextArea
+        className={inputClasses.join(' ')}
+        rows={4}
+        onChange={props.onChange}
+        {...field}
+        {...props}
+      />
       {meta.touched && meta.error ? (
         <div className={errorLabelClasses.join(' ')}>{meta.error}</div>
       ) : null}

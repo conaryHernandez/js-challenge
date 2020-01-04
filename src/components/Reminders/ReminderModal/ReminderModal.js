@@ -3,39 +3,63 @@ import { Modal, Form } from 'antd';
 import { Formik } from 'formik';
 import moment from 'moment';
 
+import { validate } from '../../../utils/validator';
+
 import {
-  Textarea,
   Input,
   TimePicker,
   DatePicker,
-  Autocomplete
+  Autocomplete,
+  ColorPicker
 } from '../../../components/FormElements';
 
-// values => validate(values, this.state.rules)
-
 class ReminderModal extends Component {
+  state = {
+    rules: {
+      title: {
+        isRequired: true
+      },
+      color: {
+        isRequired: true
+      },
+      time: {
+        isRequired: true
+      },
+      date: {
+        isRequired: true
+      },
+      city: {
+        isRequired: true
+      }
+    }
+  };
+
+  onSubmit = (values, setSubmitting) => {
+    setTimeout(() => {
+      alert(JSON.stringify(values, null, 2));
+      setSubmitting(false);
+    }, 400);
+    this.props.handleOk();
+    this.props.addItem(values);
+  };
+
   render() {
-    const { confirmLoading, visible, handleOk, handleCancel } = this.props;
+    const { confirmLoading, visible, handleCancel } = this.props;
 
     return (
       <Formik
         initialValues={{
           title: '',
-          description: '',
           time: moment(),
           date: moment(),
-          city: ''
+          city: '',
+          color: ''
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
-
-          handleOk();
-        }}
+        onSubmit={(values, { setSubmitting }) =>
+          this.onSubmit(values, setSubmitting)
+        }
         validateOnChange
-        validate={() => {}}
+        validate={values => validate(values, this.state.rules)}
       >
         {props => {
           const {
@@ -69,36 +93,37 @@ class ReminderModal extends Component {
                   value={values.title}
                   id="title"
                 />
-                <Textarea
-                  label="Description"
-                  name="description"
-                  placeholder="Enter a description"
+
+                <ColorPicker
+                  name="color"
+                  label="Select a color"
                   onChange={handleChange}
-                  value={values.description}
-                  id="description"
+                  value={values.color}
+                  id="color"
                 />
+
                 <TimePicker
-                  onChange={handleChange}
                   label="Time"
                   name="time"
+                  onChange={handleChange}
                   value={values.time}
                   id="time"
                 />
 
                 <DatePicker
-                  onChange={handleChange}
-                  value={values.date}
                   name="date"
                   id="date"
+                  onChange={handleChange}
+                  value={values.date}
                   label="Select a Date"
                 />
 
                 <Autocomplete
                   name="city"
                   id="city"
-                  label="Select a city"
-                  value={values.city}
                   onChange={handleChange}
+                  value={values.city}
+                  label="Select a city"
                 />
               </Form>
             </Modal>
