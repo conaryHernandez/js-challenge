@@ -1,35 +1,58 @@
 import React, { Component } from 'react';
-import Calendar from 'react-calendar';
-
-import classes from './Calendar.module.scss';
+import { Calendar, Badge } from 'antd';
 
 class CalendarWrapper extends Component {
-  state = {
-    date: new Date()
+  getListData = value => {
+    let listData;
+    switch (value.date()) {
+      case 8:
+        listData = [
+          { type: 'warning', content: 'This is warning event.' },
+          { type: 'success', content: 'This is usual event.' }
+        ];
+        break;
+      case 10:
+        listData = [
+          { type: 'warning', content: 'This is warning event.' },
+          { type: 'success', content: 'This is usual event.' },
+          { type: 'error', content: 'This is error event.' }
+        ];
+        break;
+      case 15:
+        listData = [
+          { type: 'warning', content: 'This is warning event' },
+          { type: 'success', content: 'This is very long usual event。。....' },
+          { type: 'error', content: 'This is error event 1.' },
+          { type: 'error', content: 'This is error event 2.' },
+          { type: 'error', content: 'This is error event 3.' },
+          { type: 'error', content: 'This is error event 4.' }
+        ];
+        break;
+      default:
+    }
+    return listData || [];
   };
 
-  handleChange = date => this.setState({ date });
+  dateCellRender = value => {
+    const listData = this.getListData(value);
+    return (
+      <ul className="events">
+        {listData.map(item => (
+          <li key={item.content}>
+            <Badge status={item.type} text={item.content} />
+          </li>
+        ))}
+      </ul>
+    );
+  };
 
   render() {
-    const startDate = new Date(2019, 3, 2);
-
     return (
-      <div>
-        <Calendar
-          // nextLabel={<ChevronRight />}
-          // prevLabel={<ChevronLeft />}
-          next2Label={false}
-          prev2Label={false}
-          calendarType={'US'}
-          className={classes.calendar}
-          onChange={date => {
-            this.handleChange(date);
-            this.props.onSelectedDay(date);
-          }}
-          onClickDay={this.props.onClickDay}
-          value={this.state.date}
-        />
-      </div>
+      <Calendar
+        dateCellRender={this.dateCellRender}
+        monthCellRender={this.monthCellRender}
+        onChange={this.props.onChange}
+      />
     );
   }
 }

@@ -3,7 +3,13 @@ import { Modal, Form } from 'antd';
 import { Formik } from 'formik';
 import moment from 'moment';
 
-import { Textarea, Input, TimePicker } from '../../../components/FormElements';
+import {
+  Textarea,
+  Input,
+  TimePicker,
+  DatePicker,
+  Autocomplete
+} from '../../../components/FormElements';
 
 // values => validate(values, this.state.rules)
 
@@ -17,7 +23,8 @@ class ReminderModal extends Component {
           title: '',
           description: '',
           time: moment(),
-          day: this.props.selectedDay || ''
+          date: moment(),
+          city: ''
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
@@ -28,7 +35,8 @@ class ReminderModal extends Component {
           handleOk();
         }}
         validateOnChange
-        validate={() => {}}>
+        validate={() => {}}
+      >
         {props => {
           const {
             values,
@@ -43,15 +51,14 @@ class ReminderModal extends Component {
             handleSubmit
           } = props;
 
-          console.log('values.day', this.props.selectedDay);
-
           return (
             <Modal
               title="Add New Reminder"
               visible={visible}
               onOk={handleSubmit}
               confirmLoading={confirmLoading}
-              onCancel={handleCancel}>
+              onCancel={handleCancel}
+            >
               <Form>
                 <Input
                   label="Title"
@@ -77,12 +84,21 @@ class ReminderModal extends Component {
                   value={values.time}
                   id="time"
                 />
-                <Input
-                  name="day"
-                  type="text"
+
+                <DatePicker
                   onChange={handleChange}
-                  value={values.day}
-                  id="day"
+                  value={values.date}
+                  name="date"
+                  id="date"
+                  label="Select a Date"
+                />
+
+                <Autocomplete
+                  name="city"
+                  id="city"
+                  label="Select a city"
+                  value={values.city}
+                  onChange={handleChange}
                 />
               </Form>
             </Modal>

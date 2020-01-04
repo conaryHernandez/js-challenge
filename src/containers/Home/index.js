@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
+import { Button } from 'antd';
+
 import Calendar from '../../components/Calendar/Calendar';
 import ReminderModal from './ReminderModal/ReminderModal';
-import moment from 'moment';
 
 class Home extends Component {
   state = {
@@ -41,10 +42,17 @@ class Home extends Component {
     return (
       <Fragment>
         <h1>My Calendar</h1>
-        <Calendar
-          onClickDay={this.showModal}
-          onSelectedDay={this.handleSelectedDay}
-        />
+        <Button
+          type="primary"
+          onClick={this.showModal}
+          shape="round"
+          icon="plus"
+          size="large"
+        >
+          Add Reminder
+        </Button>
+
+        <Calendar onChange={e => console.log(e)} />
 
         <ReminderModal
           handleCancel={this.handleCancel}

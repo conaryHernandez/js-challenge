@@ -7,7 +7,7 @@ import './App.css';
 // Routes
 const Home = React.lazy(() => import('./containers/Home'));
 const ReminderForm = React.lazy(() =>
-  import('./containers/ReminderForm/ReminderForm')
+  import('./containers/Reminders/Reminders')
 );
 
 const App = () => {

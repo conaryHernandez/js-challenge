@@ -1,20 +1,20 @@
 import React from 'react';
 import { useField } from 'formik';
-import { TimePicker } from 'antd';
+import { DatePicker } from 'antd';
 import moment from 'moment';
 
 import classes from '../index.module.scss';
 
-const CustomTimePicker = ({ label, ...props }) => {
+const CustomDatePicker = ({ label, ...props }) => {
   const [field, meta] = useField(props);
+  const dateFormat = 'YYYY/MM/DD';
 
   const errorLabelClasses = [meta.error && meta.touched ? classes.Invalid : ''];
-  const format = 'HH:mm';
 
-  function onChange(time, timeString) {
+  function onChange(date, dateString) {
     const fakeEvent = {
       currentTarget: {
-        value: moment(time).format(),
+        value: date.format(),
         type: 'text',
         name: props.name
       }
@@ -32,13 +32,13 @@ const CustomTimePicker = ({ label, ...props }) => {
         {label}
       </label>
 
-      <TimePicker
-        defaultValue={moment('12:08', format)}
-        format={format}
-        {...props}
+      <DatePicker
+        defaultValue={moment('2015/01/01', dateFormat)}
+        format={dateFormat}
         {...field}
-        value={moment(props.value)}
+        {...props}
         onChange={onChange}
+        value={moment(props.value)}
       />
 
       {meta.touched && meta.error ? (
@@ -48,4 +48,4 @@ const CustomTimePicker = ({ label, ...props }) => {
   );
 };
 
-export default CustomTimePicker;
+export default CustomDatePicker;
