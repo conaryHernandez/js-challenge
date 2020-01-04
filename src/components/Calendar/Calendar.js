@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Calendar, Badge, Tag } from 'antd';
 import moment from 'moment';
 
-import classes from './Calendar.module.scss';
+import './Calendar.module.scss';
 
 class CalendarWrapper extends Component {
   getListData = value => {
@@ -47,16 +47,10 @@ class CalendarWrapper extends Component {
     return elementToRender;
   };
 
-  monthCellRender = () => {
-    return <div>HOLA</div>;
-  };
-
   render() {
     return (
       <Calendar
         dateCellRender={this.dateCellRender}
-        monthFullCellRender={this.monthCellRender}
-        // onChange={this.props.onChange}
         onSelect={date => this.props.onSelectDate(date)}
       />
     );

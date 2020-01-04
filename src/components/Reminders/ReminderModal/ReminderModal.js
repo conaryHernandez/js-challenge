@@ -9,9 +9,11 @@ import {
   Input,
   TimePicker,
   DatePicker,
-  Autocomplete,
-  ColorPicker
+  ColorPicker,
+  Select
 } from '../../../components/FormElements';
+
+import cities from '../../../assets/cities.json';
 
 class ReminderModal extends Component {
   state = {
@@ -119,12 +121,13 @@ class ReminderModal extends Component {
                   label="Select a Date"
                 />
 
-                <Autocomplete
+                <Select
                   name="city"
                   id="city"
                   onChange={handleChange}
                   value={values.city}
                   label="Select a city"
+                  initialData={cities}
                 />
               </Form>
             </Modal>
