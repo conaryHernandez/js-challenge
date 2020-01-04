@@ -14,7 +14,7 @@ class Home extends Component {
   };
 
   componentDidUpdate() {
-    console.log('this.props.reminders', this.props.reminders);
+    console.log(this.props.reminders);
   }
 
   showModal = () => {
@@ -41,6 +41,12 @@ class Home extends Component {
     }, 2000);
   };
 
+  redirectToRemindersPage = date => {
+    this.props.history.push('/reminders');
+
+    this.props.onAddCurrentDate(date);
+  };
+
   handleSelectedDay = date => this.setState({ selectedDay: date });
 
   render() {
@@ -58,7 +64,7 @@ class Home extends Component {
         </Button>
 
         <Calendar
-          onChange={e => console.log(e)}
+          onSelectDate={this.redirectToRemindersPage}
           reminders={this.props.reminders}
         />
 
@@ -83,7 +89,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddReminder: data => dispatch(actions.addReminder(data))
+    onAddReminder: data => dispatch(actions.addReminder(data)),
+    onAddCurrentDate: date => dispatch(actions.addCurrentDate(date))
   };
 };
 

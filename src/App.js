@@ -16,7 +16,7 @@ const App = () => {
       <React.Suspense fallback={<Spinner />}>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/reminder" component={ReminderForm} />
+          <Route path="/reminders" component={ReminderForm} />
           <Redirect to="/" />
         </Switch>
       </React.Suspense>

@@ -1,1 +1,2 @@
 export const ADD_REMINDER = 'ADD_REMINDER';
+export const ADD_CURRENT_DATE = 'ADD_CURRENT_DATE';

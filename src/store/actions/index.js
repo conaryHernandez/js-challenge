@@ -1,1 +1,1 @@
-export { addReminder } from './reminders';
+export { addReminder, addCurrentDate } from './reminders';

@@ -1,34 +1,44 @@
-.calendar {
-  width: 100%;
-  max-width: 50rem;
-  margin: auto;
-  margin-top: 5rem;
+:global {
+  .ant-fullcalendar-fullscreen {
+    width: 100%;
+    max-width: 76.8rem;
+    margin: auto;
+    margin-top: 2.5rem;
+  }
 
-  :global {
-    .react-calendar__navigation {
-      margin-bottom: 0;
-    }
-    .react-calendar__month-view__weekdays {
-      background: dodgerblue;
-      color: white;
-      margin-bottom: 1rem;
+  .events {
+    list-style: none;
+    padding-left: 0;
+  }
 
-      abbr {
-        text-decoration: none;
-      }
+  .ant-fullcalendar-content {
+    overflow-x: hidden;
+  }
+
+  .ant-fullcalendar-calendar-body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .ant-fullcalendar-cell {
+    .ant-badge {
+      width: 49%;
     }
-    .react-calendar__tile {
+    .ant-badge-status-dot {
+      top: -5px;
+    }
+    .ant-badge-status-text {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    .ant-tag {
+      display: inline-block;
+      width: 40%;
       position: relative;
-      width: 10rem;
-      height: 5rem;
-
-      abbr {
-        position: absolute;
-        top: 0;
-        left: 0.5rem;
-        text-align: right;
-        display: left;
-      }
+      top: -5px;
     }
   }
 }

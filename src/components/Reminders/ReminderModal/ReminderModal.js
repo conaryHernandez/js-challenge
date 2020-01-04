@@ -92,6 +92,7 @@ class ReminderModal extends Component {
                   onChange={handleChange}
                   value={values.title}
                   id="title"
+                  maxLength={30}
                 />
 
                 <ColorPicker

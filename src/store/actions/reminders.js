@@ -6,3 +6,10 @@ export const addReminder = data => {
     data
   };
 };
+
+export const addCurrentDate = date => {
+  return {
+    type: actionTypes.ADD_CURRENT_DATE,
+    date
+  };
+};

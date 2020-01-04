@@ -1,7 +1,8 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  reminders: []
+  reminders: [],
+  currentDate: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -14,6 +15,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         reminders: updatedIngredients
+      };
+    case actionTypes.ADD_CURRENT_DATE:
+      return {
+        ...state,
+        currentDate: action.date
       };
     default:
       return state;
