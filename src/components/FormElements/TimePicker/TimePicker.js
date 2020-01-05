@@ -14,17 +14,17 @@ const CustomTimePicker = ({ label, ...props }) => {
   ];
   const format = 'HH:mm';
 
-  function onChange(time, timeString) {
+  const onChange = (time, timeString) => {
     const fakeEvent = {
       currentTarget: {
-        value: moment(time).format(),
+        value: time ? time.format() : moment(),
         type: 'text',
         name: props.name
       }
     };
 
     props.onChange(fakeEvent);
-  }
+  };
 
   return (
     <div>
@@ -43,6 +43,7 @@ const CustomTimePicker = ({ label, ...props }) => {
         {...field}
         value={moment(props.value)}
         onChange={onChange}
+        suffixIcon={<span />}
       />
 
       {meta.touched && meta.error ? (

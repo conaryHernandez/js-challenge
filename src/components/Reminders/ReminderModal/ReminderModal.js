@@ -158,6 +158,7 @@ class ReminderModal extends Component {
                   value={values.city}
                   label="Select a city"
                   initialData={cities}
+                  defaultValue={[{ name: values.city }]}
                 />
               </Form>
             </Modal>

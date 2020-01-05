@@ -15,6 +15,13 @@ export const editReminder = payload => {
   };
 };
 
+export const deleteReminder = reminderId => {
+  return {
+    type: actionTypes.DELETE_REMINDER,
+    reminderId
+  };
+};
+
 export const addCurrentDate = date => {
   return {
     type: actionTypes.ADD_CURRENT_DATE,

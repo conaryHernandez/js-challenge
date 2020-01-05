@@ -32,6 +32,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         reminders: updatedReminders
       };
+    case actionTypes.DELETE_REMINDER:
+      const updatedElements = state.reminders.filter(
+        rmd => rmd.id !== action.reminderId
+      );
+
+      console.log('action.reminder', action.reminderId);
+      console.log('updatedElements', updatedElements);
+
+      return {
+        ...state,
+        reminders: updatedElements
+      };
     case actionTypes.ADD_CURRENT_DATE:
       return {
         ...state,

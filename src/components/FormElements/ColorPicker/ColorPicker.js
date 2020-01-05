@@ -13,7 +13,7 @@ const ColorPicker = ({ label, ...props }) => {
     meta.error && meta.touched ? classes.InvalidText : ''
   ];
 
-  function onChange(value) {
+  const onChange = value => {
     const fakeEvent = {
       currentTarget: {
         value: value.hex,
@@ -23,7 +23,7 @@ const ColorPicker = ({ label, ...props }) => {
     };
 
     props.onChange(fakeEvent);
-  }
+  };
 
   return (
     <div>

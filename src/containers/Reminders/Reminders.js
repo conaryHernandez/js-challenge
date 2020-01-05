@@ -5,8 +5,6 @@ import ReminderModal from '../../components/Reminders/ReminderModal/ReminderModa
 import moment from 'moment';
 import * as actions from '../../store/actions';
 
-// import * as actions from '../../store/actions';
-
 class Reminders extends Component {
   state = {
     date: '',
@@ -59,6 +57,12 @@ class Reminders extends Component {
     }, 2000);
   };
 
+  deleteReminder = id => {
+    this.props.onDeleteReminder(id);
+
+    this.setState({ selectedElement: {} });
+  };
+
   render() {
     return (
       <Fragment>
@@ -66,6 +70,7 @@ class Reminders extends Component {
         <ReminderTable
           reminders={this.state.reminders}
           editAction={this.showReminderModal}
+          deleteAction={this.deleteReminder}
         />
 
         {this.state.visible ? (
@@ -99,7 +104,8 @@ const mapDispatchToProps = dispatch => {
     onAddReminder: data => dispatch(actions.addReminder(data)),
     onAddCurrentDate: date => dispatch(actions.addCurrentDate(date)),
     onSetWeather: city => dispatch(actions.initGetWeather(city)),
-    onEditReminder: data => dispatch(actions.editReminder(data))
+    onEditReminder: data => dispatch(actions.editReminder(data)),
+    onDeleteReminder: id => dispatch(actions.deleteReminder(id))
   };
 };
 

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Table, Tag, Divider, Button } from 'antd';
 import moment from 'moment';
 
@@ -33,10 +33,18 @@ const ReminderTable = props => {
       key: 'action',
       render: (text, record) => (
         <span key={text.id}>
-          <Button onClick={() => props.editAction(record)}>Edit</Button>
+          <Button icon="edit" onClick={() => props.editAction(record)}>
+            Edit
+          </Button>
           <Divider type="vertical" />
-
-          <a href="/">Delete</a>
+          {console.log('record.id', record.id)}
+          <Button
+            icon="delete"
+            type="danger"
+            onClick={() => props.deleteAction(record.id)}
+          >
+            Delete
+          </Button>
         </span>
       )
     }
@@ -49,14 +57,6 @@ const ReminderTable = props => {
         columns={columns}
         dataSource={props.reminders}
         pagination={false}
-        onRow={(record, rowIndex) => {
-          return {
-            onClick: event => {
-              event.persist();
-              console.log(event);
-            } // click row
-          };
-        }}
       />
     </Fragment>
   );

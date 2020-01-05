@@ -15,17 +15,17 @@ const CustomDatePicker = ({ label, ...props }) => {
     meta.error && meta.touched ? classes.InvalidText : ''
   ];
 
-  function onChange(date, dateString) {
+  const onChange = (date, dateString) => {
     const fakeEvent = {
       currentTarget: {
-        value: date.format(),
+        value: date ? date.format() : '',
         type: 'text',
         name: props.name
       }
     };
 
     props.onChange(fakeEvent);
-  }
+  };
 
   return (
     <div>

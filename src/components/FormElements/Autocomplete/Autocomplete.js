@@ -29,7 +29,7 @@ const CustomAutocomplete = ({ label, ...props }) => {
     meta.error && meta.touched ? classes.InvalidText : ''
   ];
 
-  function onChange(value) {
+  const onChange = value => {
     const fakeEvent = {
       currentTarget: {
         value: value,
@@ -39,7 +39,7 @@ const CustomAutocomplete = ({ label, ...props }) => {
     };
 
     props.onChange(fakeEvent);
-  }
+  };
 
   return (
     <div className="certain-category-search-wrapper" style={{ width: 250 }}>
