@@ -65,8 +65,6 @@ const VSelect = ({ label, ...props }) => {
         {label}
       </label>
 
-      {console.log('props', props)}
-
       <Select
         options={props.initialData}
         searchBy="name"

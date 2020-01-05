@@ -48,7 +48,6 @@ export const addCurrentDate = date => {
 };
 
 export const setWeather = (reminderId, payload) => {
-  console.log('reminderId', reminderId);
   return {
     type: actionTypes.SET_WEATHER,
     reminderId,
@@ -56,10 +55,24 @@ export const setWeather = (reminderId, payload) => {
   };
 };
 
+export const setForecast = (reminderId, payload) => {
+  return {
+    type: actionTypes.SET_FORECAST,
+    reminderId,
+    payload
+  };
+};
+
 export const setWeatherFail = payload => {
-  console.log('payload', payload);
   return {
     type: actionTypes.SET_WEATHER_FAIL,
+    payload
+  };
+};
+
+export const setForecastFail = payload => {
+  return {
+    type: actionTypes.SET_FORECAST_FAIL,
     payload
   };
 };
@@ -68,9 +81,6 @@ export const initGetWeather = (city, reminderId) => {
   const cityName = city.split(',')[0];
 
   return dispatch => {
-    //let url = `https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b6907d289e10d714a6e88b30761fae22`;
-    // let url = 'https://api.openweathermap.org/data/2.5/weather?';
-    // let url = `https://api.openweathermap.org/data/2.5/weather/?units=metric&id=697959&appid=34144a1d42f51abe5d962ecbccc72a09`;
     let url = `https://api.openweathermap.org/data/2.5/weather/?units=metric&q=${cityName}&appid=34144a1d42f51abe5d962ecbccc72a09`;
 
     axios
@@ -82,6 +92,30 @@ export const initGetWeather = (city, reminderId) => {
       .catch(error => {
         console.log('error', error);
         dispatch(setWeatherFail(error));
+      });
+  };
+};
+
+export const initGetForecast = (city, date, reminderId) => {
+  const cityName = city.split(',')[0];
+
+  return dispatch => {
+    let url = `https://api.openweathermap.org/data/2.5/forecast/?units=metric&q=${cityName}&appid=34144a1d42f51abe5d962ecbccc72a09`;
+
+    axios
+      .get(url)
+      .then(response => {
+        console.log('response', response.data);
+        const actualDate = moment(date);
+        const dateForecast = response.data.list.filter(item =>
+          moment(item.dt_txt).isSame(actualDate, 'day')
+        );
+
+        dispatch(setForecast(reminderId, dateForecast));
+      })
+      .catch(error => {
+        console.log('error', error);
+        dispatch(setForecast(error));
       });
   };
 };

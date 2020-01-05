@@ -7,3 +7,6 @@ export const ADD_CURRENT_DATE = 'ADD_CURRENT_DATE';
 
 export const SET_WEATHER = 'SET_WEATHER';
 export const SET_WEATHER_FAIL = 'SET_WEATHER_FAIL';
+
+export const SET_FORECAST = 'SET_FORECAST';
+export const SET_FORECAST_FAIL = 'SET_FORECAST_FAIL';

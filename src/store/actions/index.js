@@ -4,5 +4,6 @@ export {
   deleteReminder,
   deleteAllDateReminders,
   addCurrentDate,
-  initGetWeather
+  initGetWeather,
+  initGetForecast
 } from './reminders';

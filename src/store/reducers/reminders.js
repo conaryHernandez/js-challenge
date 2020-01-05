@@ -58,11 +58,21 @@ const reducer = (state = initialState, action) => {
 
       remindersWeather[reminderIndex].weather = action.payload;
 
-      console.log('remindersWeather', remindersWeather);
-
       return {
         ...state,
         reminders: remindersWeather
+      };
+    case actionTypes.SET_FORECAST:
+      const remindersForecast = [...state.reminders];
+      const itemIndex = state.reminders.findIndex(
+        rmd => rmd.id === action.reminderId
+      );
+
+      remindersForecast[itemIndex].dateForecast = action.payload;
+
+      return {
+        ...state,
+        reminders: remindersForecast
       };
     case actionTypes.ADD_CURRENT_DATE:
       return {

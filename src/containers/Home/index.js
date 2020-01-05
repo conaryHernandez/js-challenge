@@ -13,10 +13,6 @@ class Home extends Component {
     selectedDay: new Date()
   };
 
-  componentDidUpdate() {
-    console.log(this.props.reminders);
-  }
-
   showModal = () => {
     this.setState({
       visible: true
@@ -76,6 +72,7 @@ class Home extends Component {
           confirmLoading={this.state.confirmLoading}
           selectedDay={this.state.selectedDay}
           getDateWeather={this.props.onSetWeather}
+          getDateForecast={this.props.onSetForecast}
         />
       </Fragment>
     );
@@ -93,7 +90,9 @@ const mapDispatchToProps = dispatch => {
     onAddReminder: data => dispatch(actions.addReminder(data)),
     onAddCurrentDate: date => dispatch(actions.addCurrentDate(date)),
     onSetWeather: (city, reminderId) =>
-      dispatch(actions.initGetWeather(city, reminderId))
+      dispatch(actions.initGetWeather(city, reminderId)),
+    onSetForecast: (city, date, reminderId) =>
+      dispatch(actions.initGetForecast(city, date, reminderId))
   };
 };
 

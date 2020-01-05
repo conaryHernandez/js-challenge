@@ -51,12 +51,11 @@ class ReminderModal extends Component {
     }
 
     this.props.getDateWeather(values.city, values.id);
+    this.props.getDateForecast(values.city, values.date, values.id);
   };
 
   // creating dummy ids because there is no BE.
   generateDummyId = () => {
-    console.log('called???');
-
     return (
       '_' +
       Math.random()
@@ -76,8 +75,6 @@ class ReminderModal extends Component {
       initialValues.date = defaultData.date;
       initialValues.city = defaultData.city;
       initialValues.color = defaultData.color;
-    } else {
-      console.log('no intial data');
     }
 
     return (
@@ -104,8 +101,6 @@ class ReminderModal extends Component {
             handleSubmit,
             resetForm
           } = props;
-
-          console.log('values.id', values.id, values.city);
 
           return (
             <Modal

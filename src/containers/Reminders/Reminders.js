@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import ReminderTable from '../../components/Reminders/ReminderTable/ReminderTable';
+import ReminderTable from '../../components/Reminders/ReminderList/ReminderList';
 import ReminderModal from '../../components/Reminders/ReminderModal/ReminderModal';
 import moment from 'moment';
 import * as actions from '../../store/actions';
@@ -26,9 +26,6 @@ class Reminders extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log('prevProps', prevProps);
-    console.log('this.props.reminders', this.props.reminders);
-
     if (prevProps.reminders.length !== this.props.reminders.length) {
       this.setState({ dateReminders: this.props.reminders });
     }
@@ -103,6 +100,7 @@ class Reminders extends Component {
             editItem={this.props.onEditReminder}
             selectedDay={this.props.currentDate}
             getDateWeather={this.props.onSetWeather}
+            getDateForecast={this.props.onSetForecast}
             defaultData={this.state.selectedElement}
           />
         ) : null}
@@ -122,7 +120,10 @@ const mapDispatchToProps = dispatch => {
   return {
     onAddReminder: data => dispatch(actions.addReminder(data)),
     onAddCurrentDate: date => dispatch(actions.addCurrentDate(date)),
-    onSetWeather: city => dispatch(actions.initGetWeather(city)),
+    onSetWeather: (city, reminderId) =>
+      dispatch(actions.initGetWeather(city, reminderId)),
+    onSetForecast: (city, date, reminderId) =>
+      dispatch(actions.initGetForecast(city, date, reminderId)),
     onEditReminder: data => dispatch(actions.editReminder(data)),
     onDeleteReminder: id => dispatch(actions.deleteReminder(id)),
     onDeleteAllReminders: date => dispatch(actions.deleteAllDateReminders(date))
