@@ -1,2 +1,7 @@
 export const ADD_REMINDER = 'ADD_REMINDER';
+export const EDIT_REMINDER = 'EDIT_REMINDER';
+
 export const ADD_CURRENT_DATE = 'ADD_CURRENT_DATE';
+
+export const SET_WEATHER = 'SET_WEATHER';
+export const SET_WEATHER_FAIL = 'SET_WEATHER_FAIL';

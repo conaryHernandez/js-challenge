@@ -1,1 +1,6 @@
-export { addReminder, addCurrentDate } from './reminders';
+export {
+  addReminder,
+  editReminder,
+  addCurrentDate,
+  initGetWeather
+} from './reminders';

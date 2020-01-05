@@ -1,14 +1,19 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import ReminderTable from '../../components/Reminders/ReminderTable/ReminderTable';
+import ReminderModal from '../../components/Reminders/ReminderModal/ReminderModal';
+import moment from 'moment';
+import * as actions from '../../store/actions';
 
 // import * as actions from '../../store/actions';
 
-class ReminderForm extends Component {
+class Reminders extends Component {
   state = {
     date: '',
-    reminders: []
+    reminders: [],
+    visible: false,
+    confirmLoading: false,
+    selectedElement: {}
   };
 
   componentDidMount() {
@@ -30,11 +35,53 @@ class ReminderForm extends Component {
     this.setState({ reminders: dateReminders });
   };
 
+  getSelectedReminder = () => {};
+
+  showReminderModal = element => {
+    this.setState({ visible: true, selectedElement: element });
+  };
+
+  handleCancel = () => {
+    this.setState({
+      visible: false
+    });
+  };
+
+  handleOk = () => {
+    this.setState({
+      confirmLoading: true
+    });
+    setTimeout(() => {
+      this.setState({
+        visible: false,
+        confirmLoading: false
+      });
+    }, 2000);
+  };
+
   render() {
     return (
       <Fragment>
-        <h1>Reminder Page </h1>
-        <ReminderTable reminders={this.state.reminders} />
+        <h1>Your Reminders</h1>
+        <ReminderTable
+          reminders={this.state.reminders}
+          editAction={this.showReminderModal}
+        />
+
+        {this.state.visible ? (
+          <ReminderModal
+            mode="edit"
+            visible={this.state.visible}
+            confirmLoading={this.state.confirmLoading}
+            handleCancel={this.handleCancel}
+            handleOk={this.handleOk}
+            addItem={this.props.onAddReminder}
+            editItem={this.props.onEditReminder}
+            selectedDay={this.props.currentDate}
+            getDateWeather={this.props.onSetWeather}
+            defaultData={this.state.selectedElement}
+          />
+        ) : null}
       </Fragment>
     );
   }
@@ -47,10 +94,13 @@ const mapStateToProps = state => {
   };
 };
 
-/* const mapDispatchToProps = dispatch => {
-  return {};
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddReminder: data => dispatch(actions.addReminder(data)),
+    onAddCurrentDate: date => dispatch(actions.addCurrentDate(date)),
+    onSetWeather: city => dispatch(actions.initGetWeather(city)),
+    onEditReminder: data => dispatch(actions.editReminder(data))
+  };
 };
 
-*/
-
-export default connect(mapStateToProps, null)(ReminderForm);
+export default connect(mapStateToProps, mapDispatchToProps)(Reminders);

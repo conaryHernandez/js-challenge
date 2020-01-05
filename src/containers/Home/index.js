@@ -75,6 +75,7 @@ class Home extends Component {
           visible={this.state.visible}
           confirmLoading={this.state.confirmLoading}
           selectedDay={this.state.selectedDay}
+          getDateWeather={this.props.onSetWeather}
         />
       </Fragment>
     );
@@ -90,7 +91,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onAddReminder: data => dispatch(actions.addReminder(data)),
-    onAddCurrentDate: date => dispatch(actions.addCurrentDate(date))
+    onAddCurrentDate: date => dispatch(actions.addCurrentDate(date)),
+    onSetWeather: city => dispatch(actions.initGetWeather(city))
   };
 };
 

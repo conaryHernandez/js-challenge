@@ -10,11 +10,27 @@ const reducer = (state = initialState, action) => {
     case actionTypes.ADD_REMINDER:
       const updatedIngredients = [...state.reminders];
 
-      updatedIngredients.push(action.data);
+      updatedIngredients.push(action.payload);
 
       return {
         ...state,
         reminders: updatedIngredients
+      };
+    case actionTypes.EDIT_REMINDER:
+      const updatedReminders = [...state.reminders];
+      const elementIndex = state.reminders.findIndex(
+        rmd => rmd.id === action.payload.id
+      );
+
+      updatedReminders[elementIndex].title = action.payload.title;
+      updatedReminders[elementIndex].color = action.payload.color;
+      updatedReminders[elementIndex].time = action.payload.time;
+      updatedReminders[elementIndex].date = action.payload.date;
+      updatedReminders[elementIndex].city = action.payload.city;
+
+      return {
+        ...state,
+        reminders: updatedReminders
       };
     case actionTypes.ADD_CURRENT_DATE:
       return {

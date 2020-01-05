@@ -36,26 +36,56 @@ class ReminderModal extends Component {
     }
   };
 
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   onSubmit = (values, setSubmitting) => {
     setTimeout(() => {
       alert(JSON.stringify(values, null, 2));
       setSubmitting(false);
     }, 400);
+
     this.props.handleOk();
-    this.props.addItem(values);
+
+    if (this.props.mode === 'edit') {
+      this.props.editItem(values);
+    } else {
+      this.props.addItem(values);
+    }
+
+    this.props.getDateWeather(values.city);
   };
 
+  // creating dummy ids because there is no BE.
+  generateDummyId = () =>
+    '_' +
+    Math.random()
+      .toString(36)
+      .substr(2, 9);
+
   render() {
-    const { confirmLoading, visible, handleCancel } = this.props;
+    const { confirmLoading, visible, handleCancel, defaultData } = this.props;
+    let initialValues = {};
+
+    if (defaultData) {
+      initialValues.id = defaultData.id;
+      initialValues.title = defaultData.title;
+      initialValues.time = defaultData.time;
+      initialValues.date = defaultData.date;
+      initialValues.city = defaultData.city;
+      initialValues.color = defaultData.color;
+    }
 
     return (
       <Formik
         initialValues={{
-          title: '',
-          time: moment(),
-          date: moment(),
-          city: '',
-          color: ''
+          id: initialValues.id || this.generateDummyId(),
+          title: initialValues.title || '',
+          time: initialValues.time || moment(),
+          date: initialValues.date || moment(),
+          city: initialValues.city || '',
+          color: initialValues.color || ''
         }}
         onSubmit={(values, { setSubmitting }) =>
           this.onSubmit(values, setSubmitting)
@@ -67,12 +97,12 @@ class ReminderModal extends Component {
           const {
             values,
             // touched,
-            errors,
+            // errors,
             // dirty,
             // handleReset,
             // isValidating,
             // handleBlur,
-            isSubmitting,
+            // isSubmitting,
             handleChange,
             handleSubmit
           } = props;
