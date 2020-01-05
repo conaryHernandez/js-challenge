@@ -8,7 +8,7 @@ import * as actions from '../../store/actions';
 class Reminders extends Component {
   state = {
     date: '',
-    reminders: [],
+    dateReminders: [],
     visible: false,
     confirmLoading: false,
     selectedElement: {}
@@ -30,7 +30,7 @@ class Reminders extends Component {
       moment(reminder.date).isSame(date, 'day')
     );
 
-    this.setState({ reminders: dateReminders });
+    this.setState({ dateReminders });
   };
 
   getSelectedReminder = () => {};
@@ -63,14 +63,24 @@ class Reminders extends Component {
     this.setState({ selectedElement: {} });
   };
 
+  deleteAllItems = date => {
+    const selectedDay = moment(date).format('MM/DD/YYYY');
+
+    this.props.onDeleteAllReminders(selectedDay);
+
+    this.setState({ dateReminders: [] });
+  };
+
   render() {
     return (
       <Fragment>
         <h1>Your Reminders</h1>
         <ReminderTable
-          reminders={this.state.reminders}
+          reminders={this.state.dateReminders}
           editAction={this.showReminderModal}
           deleteAction={this.deleteReminder}
+          deleteAllAction={this.deleteAllItems}
+          selectedDay={this.props.currentDate}
         />
 
         {this.state.visible ? (
@@ -105,7 +115,8 @@ const mapDispatchToProps = dispatch => {
     onAddCurrentDate: date => dispatch(actions.addCurrentDate(date)),
     onSetWeather: city => dispatch(actions.initGetWeather(city)),
     onEditReminder: data => dispatch(actions.editReminder(data)),
-    onDeleteReminder: id => dispatch(actions.deleteReminder(id))
+    onDeleteReminder: id => dispatch(actions.deleteReminder(id)),
+    onDeleteAllReminders: date => dispatch(actions.deleteAllDateReminders(date))
   };
 };
 

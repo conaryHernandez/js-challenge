@@ -36,10 +36,6 @@ class ReminderModal extends Component {
     }
   };
 
-  componentDidMount() {
-    console.log(this.props);
-  }
-
   onSubmit = (values, setSubmitting) => {
     setTimeout(() => {
       alert(JSON.stringify(values, null, 2));

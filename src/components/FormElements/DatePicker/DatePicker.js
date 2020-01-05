@@ -7,7 +7,7 @@ import classes from '../index.module.scss';
 
 const CustomDatePicker = ({ label, ...props }) => {
   const [field, meta] = useField(props);
-  const dateFormat = 'YYYY/MM/DD';
+  const dateFormat = 'MM/DD/YYYY';
 
   const inputClasses = [meta.error && meta.touched ? classes.Invalid : ''];
 
@@ -16,6 +16,7 @@ const CustomDatePicker = ({ label, ...props }) => {
   ];
 
   const onChange = (date, dateString) => {
+    console.log('onchage datepciker', date);
     const fakeEvent = {
       currentTarget: {
         value: date ? date.format() : '',

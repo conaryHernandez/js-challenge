@@ -12,6 +12,12 @@ const ReminderTable = props => {
       key: 'title'
     },
     {
+      title: 'Date',
+      dataIndex: 'date',
+      key: 'date',
+      render: date => moment(date).format('MM/DD/YYYY')
+    },
+    {
       title: 'Time',
       dataIndex: 'time',
       key: 'time',
@@ -58,6 +64,12 @@ const ReminderTable = props => {
         dataSource={props.reminders}
         pagination={false}
       />
+      <Button
+        type="danger"
+        onClick={() => props.deleteAllAction(props.selectedDay)}
+      >
+        Delete All
+      </Button>
     </Fragment>
   );
 };

@@ -1,17 +1,28 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
+import moment from 'moment';
 
 export const addReminder = payload => {
+  const formattedDate = moment(payload.date).format('MM/DD/YYYY');
+
   return {
     type: actionTypes.ADD_REMINDER,
-    payload
+    payload: {
+      ...payload,
+      date: formattedDate
+    }
   };
 };
 
 export const editReminder = payload => {
+  const formattedDate = moment(payload.date).format('MM/DD/YYYY');
+
   return {
     type: actionTypes.EDIT_REMINDER,
-    payload
+    payload: {
+      ...payload,
+      date: formattedDate
+    }
   };
 };
 
@@ -19,6 +30,13 @@ export const deleteReminder = reminderId => {
   return {
     type: actionTypes.DELETE_REMINDER,
     reminderId
+  };
+};
+
+export const deleteAllDateReminders = date => {
+  return {
+    type: actionTypes.DELETE_ALL_DATE_REMINDERS,
+    date
   };
 };
 
@@ -56,7 +74,8 @@ export const initGetWeather = city => {
   return dispatch => {
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/forecast/daily?q=${cityName},${countryCode}&appid=024e63dc106f7be2d274720960ce829c`
+        `https://api.openweathermap.org/data/2.5/forecast/daily?q=${cityName},${countryCode}&appid=34144a1d42f51abe5d962ecbccc72a09
+        `
       )
       .then(response => {
         console.log('response', response);
