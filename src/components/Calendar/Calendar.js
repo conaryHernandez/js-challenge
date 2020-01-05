@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Calendar, Badge, Tag } from 'antd';
 import moment from 'moment';
 
-import './Calendar.module.scss';
+import classes from './Calendar.module.scss';
 
 class CalendarWrapper extends Component {
   getListData = value => {
@@ -27,24 +27,25 @@ class CalendarWrapper extends Component {
 
   dateCellRender = value => {
     const listData = this.getListData(value);
-    let elementToRender = null;
 
-    if (window.innerWidth >= 768) {
-      elementToRender = (
-        <ul className="events">
-          {listData.map((item, index) => (
-            <li key={`${item.title}-${index}`}>
-              <Badge color={item.color} text={item.title} />{' '}
-              <Tag color={item.color}>{moment(item.time).format('HH:mm')}</Tag>
-            </li>
-          ))}
-        </ul>
-      );
-    } else {
-      elementToRender = <Badge count={listData.length} />;
-    }
+    return (
+      <ul className="events">
+        {listData.map((item, index) => (
+          <li key={`${item.title}-${index}`}>
+            <div
+              className={classes.Reminder}
+              style={{ backgroundColor: item.color }}
+            >
+              <b className={classes.ReminderTitle}>{item.title}</b>
 
-    return elementToRender;
+              <span className={classes.Time}>
+                {moment(item.time).format('HH:mm')}
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    );
   };
 
   render() {

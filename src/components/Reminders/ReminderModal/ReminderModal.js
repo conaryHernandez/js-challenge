@@ -50,15 +50,20 @@ class ReminderModal extends Component {
       this.props.addItem(values);
     }
 
-    this.props.getDateWeather(values.city);
+    this.props.getDateWeather(values.city, values.id);
   };
 
   // creating dummy ids because there is no BE.
-  generateDummyId = () =>
-    '_' +
-    Math.random()
-      .toString(36)
-      .substr(2, 9);
+  generateDummyId = () => {
+    console.log('called???');
+
+    return (
+      '_' +
+      Math.random()
+        .toString(36)
+        .substr(2, 9)
+    );
+  };
 
   render() {
     const { confirmLoading, visible, handleCancel, defaultData } = this.props;
@@ -71,6 +76,8 @@ class ReminderModal extends Component {
       initialValues.date = defaultData.date;
       initialValues.city = defaultData.city;
       initialValues.color = defaultData.color;
+    } else {
+      console.log('no intial data');
     }
 
     return (
@@ -92,22 +99,20 @@ class ReminderModal extends Component {
         {props => {
           const {
             values,
-            // touched,
-            // errors,
-            // dirty,
-            // handleReset,
-            // isValidating,
-            // handleBlur,
-            // isSubmitting,
+            handleReset,
             handleChange,
-            handleSubmit
+            handleSubmit,
+            resetForm
           } = props;
+
+          console.log('values.id', values.id, values.city);
 
           return (
             <Modal
               title="Add New Reminder"
               visible={visible}
               onOk={handleSubmit}
+              afterClose={handleReset}
               confirmLoading={confirmLoading}
               onCancel={handleCancel}
             >
@@ -154,7 +159,7 @@ class ReminderModal extends Component {
                   value={values.city}
                   label="Select a city"
                   initialData={cities}
-                  defaultValue={[{ name: values.city }]}
+                  defaultValue={values.city ? [{ name: values.city }] : []}
                 />
               </Form>
             </Modal>

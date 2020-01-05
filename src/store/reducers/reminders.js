@@ -33,12 +33,9 @@ const reducer = (state = initialState, action) => {
         reminders: updatedReminders
       };
     case actionTypes.DELETE_REMINDER:
-      const updatedElements = state.reminders.filter(
-        rmd => rmd.id !== action.reminderId
-      );
-
-      console.log('action.reminder', action.reminderId);
-      console.log('updatedElements', updatedElements);
+      const updatedElements = state.reminders.filter(rmd => {
+        return rmd.id !== action.reminderId;
+      });
 
       return {
         ...state,
@@ -52,6 +49,20 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         reminders: filteredReminders
+      };
+    case actionTypes.SET_WEATHER:
+      const remindersWeather = [...state.reminders];
+      const reminderIndex = state.reminders.findIndex(
+        rmd => rmd.id === action.reminderId
+      );
+
+      remindersWeather[reminderIndex].weather = action.payload;
+
+      console.log('remindersWeather', remindersWeather);
+
+      return {
+        ...state,
+        reminders: remindersWeather
       };
     case actionTypes.ADD_CURRENT_DATE:
       return {

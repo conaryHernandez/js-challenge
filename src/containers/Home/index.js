@@ -92,7 +92,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onAddReminder: data => dispatch(actions.addReminder(data)),
     onAddCurrentDate: date => dispatch(actions.addCurrentDate(date)),
-    onSetWeather: city => dispatch(actions.initGetWeather(city))
+    onSetWeather: (city, reminderId) =>
+      dispatch(actions.initGetWeather(city, reminderId))
   };
 };
 

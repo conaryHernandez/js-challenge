@@ -37,7 +37,6 @@ const VSelect = ({ label, ...props }) => {
   };
 
   const onChange = values => {
-    console.log('value on hcange', values.name);
     const fakeEvent = {
       currentTarget: {
         value: values[0].name,
@@ -57,8 +56,6 @@ const VSelect = ({ label, ...props }) => {
     meta.error && meta.touched ? classes.InvalidText : ''
   ];
 
-  console.log('defialt', props.defaultValue);
-
   return (
     <div>
       <label
@@ -67,6 +64,8 @@ const VSelect = ({ label, ...props }) => {
       >
         {label}
       </label>
+
+      {console.log('props', props)}
 
       <Select
         options={props.initialData}
@@ -81,7 +80,7 @@ const VSelect = ({ label, ...props }) => {
         {...field}
         {...props}
         onChange={onChange}
-        values={props.defaultValue}
+        values={[]}
       />
 
       {meta.touched && meta.error ? (

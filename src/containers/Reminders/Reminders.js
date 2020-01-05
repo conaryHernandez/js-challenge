@@ -25,6 +25,15 @@ class Reminders extends Component {
     this.setState({ currentDate: this.props.currentDate });
   }
 
+  componentDidUpdate(prevProps) {
+    console.log('prevProps', prevProps);
+    console.log('this.props.reminders', this.props.reminders);
+
+    if (prevProps.reminders.length !== this.props.reminders.length) {
+      this.setState({ dateReminders: this.props.reminders });
+    }
+  }
+
   getDateReminders = date => {
     const dateReminders = this.props.reminders.filter(reminder =>
       moment(reminder.date).isSame(date, 'day')

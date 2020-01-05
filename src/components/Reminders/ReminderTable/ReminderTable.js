@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { Table, Tag, Divider, Button } from 'antd';
 import moment from 'moment';
 
@@ -64,12 +64,17 @@ const ReminderTable = props => {
         dataSource={props.reminders}
         pagination={false}
       />
-      <Button
-        type="danger"
-        onClick={() => props.deleteAllAction(props.selectedDay)}
-      >
-        Delete All
-      </Button>
+
+      {props.reminders.length > 0 && (
+        <Button
+          type="danger"
+          icon="warning"
+          className={classes['delete-button']}
+          onClick={() => props.deleteAllAction(props.selectedDay)}
+        >
+          Delete All
+        </Button>
+      )}
     </Fragment>
   );
 };
