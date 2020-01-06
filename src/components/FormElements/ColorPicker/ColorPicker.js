@@ -4,6 +4,7 @@ import { useField } from 'formik';
 import { GithubPicker } from 'react-color';
 
 import classes from '../index.module.scss';
+import { Input } from 'antd';
 
 const ColorPicker = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -36,8 +37,15 @@ const ColorPicker = ({ label, ...props }) => {
         className={inputClasses.join(' ')}
       />
 
+      <Input id={props.id} type="hidden" value={props.value} />
+
       {meta.touched && meta.error ? (
-        <div className={errorLabelClasses.join(' ')}>{meta.error}</div>
+        <div
+          data-testid={`${props.id}Error`}
+          className={errorLabelClasses.join(' ')}
+        >
+          {meta.error}
+        </div>
       ) : null}
     </div>
   );

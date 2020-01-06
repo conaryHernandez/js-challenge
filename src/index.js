@@ -8,8 +8,6 @@ import thunk from 'redux-thunk';
 
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 
-import { BrowserRouter } from 'react-router-dom';
-
 import 'antd/dist/antd.css';
 import './index.css';
 import App from './App';
@@ -34,9 +32,7 @@ const store = createStore(
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <App />
   </Provider>
 );
 

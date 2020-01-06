@@ -131,6 +131,7 @@ class ReminderModal extends Component {
               }}
               confirmLoading={confirmLoading}
               onCancel={handleCancel}
+              okButtonProps={{ className: 'submit-button' }}
             >
               <Form>
                 <Input
@@ -146,7 +147,7 @@ class ReminderModal extends Component {
 
                 <ColorPicker
                   name="color"
-                  label="Select a color"
+                  label="Color"
                   onChange={handleChange}
                   value={values.color}
                   id="color"

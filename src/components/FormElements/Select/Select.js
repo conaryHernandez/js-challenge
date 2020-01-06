@@ -87,7 +87,12 @@ const VSelect = ({ label, ...props }) => {
       />
 
       {meta.touched && meta.error ? (
-        <div className={errorLabelClasses.join(' ')}>{meta.error}</div>
+        <div
+          data-testid={`${props.id}Error`}
+          className={errorLabelClasses.join(' ')}
+        >
+          {meta.error}
+        </div>
       ) : null}
     </div>
   );

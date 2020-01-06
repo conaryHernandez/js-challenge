@@ -28,13 +28,11 @@ class Reminders extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.reminders.length !== this.props.reminders.length) {
-      console.log('update?');
       this.getDateReminders(this.props.currentDate);
     }
   }
 
   getDateReminders = date => {
-    console.log('props no han cambiando', this.props.reminders);
     const dateReminders = this.props.reminders.filter(reminder =>
       moment(reminder.date).isSame(date, 'day')
     );

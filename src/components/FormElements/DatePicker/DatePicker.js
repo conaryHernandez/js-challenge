@@ -1,6 +1,6 @@
 import React from 'react';
 import { useField } from 'formik';
-import { DatePicker } from 'antd';
+import { DatePicker, Input } from 'antd';
 import moment from 'moment';
 
 import classes from '../index.module.scss';
@@ -45,6 +45,8 @@ const CustomDatePicker = ({ label, ...props }) => {
         onChange={onChange}
         value={moment(props.value)}
       />
+
+      <Input id={props.id} type="hidden" value={props.value} />
 
       {meta.touched && meta.error ? (
         <div className={errorLabelClasses.join(' ')}>{meta.error}</div>

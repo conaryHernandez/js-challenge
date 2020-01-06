@@ -1,7 +1,7 @@
 import reducer from './reminders';
 import * as actionTypes from '../actions/actionTypes';
 
-describe('remidners reducer', () => {
+describe('reminders reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual({
       reminders: [],
