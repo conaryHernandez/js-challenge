@@ -33,7 +33,37 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 
 ### Layout
 
-The following shows...
+Once your app is running you will see the Home page of the app.
+
+(/images/home.png)
+
+You can add remidners for a specific date and also you can see your reminders per day by clicking in a specific day in the calendar.
+
+When you click the "Add Reminder" Button the following modal will appear. You can add a title to your reminder (max. 30 chars) and also pick a color, date, time and city.
+The city can be selected from a Select Component which display a list of cities. A city can be searched by introducing the text in the input or selecting it from the given options.
+
+All fields are required in order to create a reminder.
+
+(/images/reminder-modal.png)
+
+Once you create a reminder it will be displayed in the calendar as a miniature.
+
+(/images/reminder-card.png)
+
+If you want to see your reminders per day you just need to click an specific day in the calendar and it will render the Reminders page of the app.
+
+(/images/reminders.png)
+
+And you will see the forecast per city if is avaible for the selected date.
+
+You can edit an existing reminder by clicking the "Edit" button. You can edit any field of the reminder any times you want.
+
+(/images/reminder-edit.png)
+
+If you there is no reminders in a specific date you will se the following message
+
+(/images/reminders-empty.png)
+
 
 ## Running the tests
 
