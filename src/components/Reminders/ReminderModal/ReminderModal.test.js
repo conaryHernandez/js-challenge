@@ -7,6 +7,7 @@ import {
   queryByAttribute
 } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import ReactTestUtils from 'react-dom/test-utils';
 
 import ReminderModal from './ReminderModal';
 
@@ -26,7 +27,7 @@ describe('ReminderModal Component', () => {
         addItem={jest.fn()}
         visible={true}
         confirmLoading={false}
-        selectedDay={jest.fn()}
+        selectedDay=""
         getDateWeather={jest.fn()}
         getDateForecast={jest.fn()}
       />
@@ -43,6 +44,31 @@ describe('ReminderModal Component', () => {
     await wait(() => {
       expect(getByTestId('titleError')).not.toBe(null);
       expect(getByTestId('titleError')).toHaveTextContent('Required');
+    });
+  });
+
+  it('should validate if title has more than 30 characters', async () => {
+    jest.setTimeout(10000);
+
+    const { getByTestId } = container;
+    const button = document.getElementsByClassName('submit-button')[0];
+    const input = document.querySelector('input[name="title"]');
+
+    ReactTestUtils.Simulate.change(input, {
+      target: {
+        value: 'SOwTgyqrPjKpAcAJxVSOwTgyqrPjKpAcAJxV',
+        id: 'title',
+        name: 'title'
+      }
+    });
+
+    fireEvent.click(button);
+
+    await wait(() => {
+      expect(getByTestId('titleError')).not.toBe(null);
+      expect(getByTestId('titleError')).toHaveTextContent(
+        'Max length required 30'
+      );
     });
   });
 

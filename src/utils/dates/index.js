@@ -5,10 +5,10 @@ export const minutesOfDay = m => {
 };
 
 export const validaNewReminderDate = (
-  newReminderId,
-  newReminderTime,
-  newReminderDate,
-  reminders
+  newReminderId = '',
+  newReminderTime = moment(),
+  newReminderDate = moment(),
+  reminders = []
 ) => {
   return reminders.some(
     rmd =>

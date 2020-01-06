@@ -40,4 +40,31 @@ describe('reminders reducer', () => {
       ]
     });
   });
+
+  it('should delete an old reminder from the store', () => {
+    expect(
+      reducer(
+        {
+          reminders: [
+            {
+              id: 'testingId',
+              title: 'test reminder',
+              city: 'test city',
+              time: '2020-01-17T02:58:58.887Z',
+              date: '2020-01-18T02:58:58.887Z',
+              color: '#ddd'
+            }
+          ],
+          currentDate: ''
+        },
+        {
+          type: actionTypes.DELETE_REMINDER,
+          reminderId: 'testingId'
+        }
+      )
+    ).toEqual({
+      currentDate: '',
+      reminders: []
+    });
+  });
 });
