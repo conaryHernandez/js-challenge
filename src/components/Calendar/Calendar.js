@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Calendar } from 'antd';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 import classes from './Calendar.module.scss';
 
@@ -34,8 +35,7 @@ class CalendarWrapper extends Component {
           <li key={`${item.title}-${index}`}>
             <div
               className={classes.Reminder}
-              style={{ backgroundColor: item.color }}
-            >
+              style={{ backgroundColor: item.color }}>
               <b className={classes.ReminderTitle}>{item.title}</b>
 
               <span className={classes.Time}>
@@ -57,5 +57,15 @@ class CalendarWrapper extends Component {
     );
   }
 }
+
+CalendarWrapper.propTypes = {
+  reminders: PropTypes.array.isRequired,
+  onSelectDate: PropTypes.func
+};
+
+CalendarWrapper.defaultProps = {
+  reminders: [],
+  onSelectDate: () => {}
+};
 
 export default CalendarWrapper;

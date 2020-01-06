@@ -2,6 +2,7 @@ import React from 'react';
 import { useField } from 'formik';
 import { TimePicker } from 'antd';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 import classes from '../index.module.scss';
 
@@ -30,8 +31,7 @@ const CustomTimePicker = ({ label, ...props }) => {
     <div>
       <label
         htmlFor={props.id || props.name}
-        className={classes['control-label']}
-      >
+        className={classes['control-label']}>
         {label}
       </label>
 
@@ -51,6 +51,20 @@ const CustomTimePicker = ({ label, ...props }) => {
       ) : null}
     </div>
   );
+};
+
+CustomTimePicker.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
+};
+
+CustomTimePicker.defaultProps = {
+  id: '',
+  name: '',
+  label: 'Enter a Value',
+  onChange: () => {}
 };
 
 export default CustomTimePicker;

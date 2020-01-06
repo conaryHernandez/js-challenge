@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'antd';
+import { Button, Typography } from 'antd';
 
 import Calendar from '../../components/Calendar/Calendar';
 import ReminderModal from '../../components/Reminders/ReminderModal/ReminderModal';
 import * as actions from '../../store/actions';
+
+const { Title } = Typography;
 
 class Home extends Component {
   state = {
@@ -54,14 +56,13 @@ class Home extends Component {
   render() {
     return (
       <Fragment>
-        <h1>My Calendar</h1>
+        <Title className="MainTitle">My Calendar</Title>
         <Button
           type="primary"
           onClick={this.showModal}
           shape="round"
           icon="plus"
-          size="large"
-        >
+          size="large">
           Add Reminder
         </Button>
 

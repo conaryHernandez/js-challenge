@@ -2,6 +2,7 @@ import React from 'react';
 import { useField } from 'formik';
 // import { Input } from 'antd';
 import { GithubPicker } from 'react-color';
+import PropTypes from 'prop-types';
 
 import classes from '../index.module.scss';
 import { Input } from 'antd';
@@ -42,13 +43,26 @@ const ColorPicker = ({ label, ...props }) => {
       {meta.touched && meta.error ? (
         <div
           data-testid={`${props.id}Error`}
-          className={errorLabelClasses.join(' ')}
-        >
+          className={errorLabelClasses.join(' ')}>
           {meta.error}
         </div>
       ) : null}
     </div>
   );
+};
+
+ColorPicker.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
+};
+
+ColorPicker.defaultProps = {
+  id: '',
+  name: '',
+  label: 'Enter a Value',
+  onChange: () => {}
 };
 
 export default ColorPicker;

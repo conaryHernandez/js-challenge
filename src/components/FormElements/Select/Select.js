@@ -2,6 +2,7 @@ import React from 'react';
 import { useField } from 'formik';
 import Select from 'react-dropdown-select';
 import { List } from 'react-virtualized';
+import PropTypes from 'prop-types';
 
 import classes from '../index.module.scss';
 import './Select.module.scss';
@@ -19,8 +20,7 @@ const VSelect = ({ label, ...props }) => {
           key={options[index].id}
           className="dropdown-element"
           style={style}
-          onClick={() => methods.addItem(options[index])}
-        >
+          onClick={() => methods.addItem(options[index])}>
           {options[index].name}
         </div>
       );
@@ -64,8 +64,7 @@ const VSelect = ({ label, ...props }) => {
     <div>
       <label
         className={classes['control-label']}
-        htmlFor={props.id || props.name}
-      >
+        htmlFor={props.id || props.name}>
         {label}
       </label>
 
@@ -89,13 +88,26 @@ const VSelect = ({ label, ...props }) => {
       {meta.touched && meta.error ? (
         <div
           data-testid={`${props.id}Error`}
-          className={errorLabelClasses.join(' ')}
-        >
+          className={errorLabelClasses.join(' ')}>
           {meta.error}
         </div>
       ) : null}
     </div>
   );
+};
+
+VSelect.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
+};
+
+VSelect.defaultProps = {
+  id: '',
+  name: '',
+  label: 'Enter a Value',
+  onChange: () => {}
 };
 
 export default VSelect;

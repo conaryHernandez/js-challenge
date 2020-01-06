@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 import { Icon, Typography, Button, Card, Row, Col, Result } from 'antd';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 import classes from './ReminderList.module.scss';
 
 const { Text } = Typography;
 
-const ReminderTable = props => {
+const ReminderList = props => {
   const buildForecast = rmd => {
     const { dateForecast = [] } = rmd;
 
@@ -42,8 +43,7 @@ const ReminderTable = props => {
           key={rmd.id}
           title={rmd.title}
           bordered
-          bodyStyle={{ backgroundColor: rmd.color }}
-        >
+          bodyStyle={{ backgroundColor: rmd.color }}>
           <p>
             <Icon type="hourglass" />
             <Text ellipsis underline className={classes.Text}>
@@ -68,8 +68,7 @@ const ReminderTable = props => {
             <Button
               icon="delete"
               type="danger"
-              onClick={() => props.deleteAction(rmd.id)}
-            >
+              onClick={() => props.deleteAction(rmd.id)}>
               Delete
             </Button>
           </div>
@@ -85,8 +84,7 @@ const ReminderTable = props => {
         type="primary"
         icon="left"
         className={classes['delete-button']}
-        onClick={props.goBack}
-      >
+        onClick={props.goBack}>
         Go Back
       </Button>
 
@@ -95,8 +93,7 @@ const ReminderTable = props => {
           type="danger"
           icon="warning"
           className={classes['delete-button']}
-          onClick={() => props.deleteAllAction(props.selectedDay)}
-        >
+          onClick={() => props.deleteAllAction(props.selectedDay)}>
           Delete All
         </Button>
       )}
@@ -104,4 +101,22 @@ const ReminderTable = props => {
   );
 };
 
-export default ReminderTable;
+ReminderList.propTypes = {
+  reminders: PropTypes.array.isRequired,
+  editAction: PropTypes.func,
+  deleteAction: PropTypes.func,
+  deleteAllAction: PropTypes.func,
+  selectedDay: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  goBack: PropTypes.func
+};
+
+ReminderList.defaultProps = {
+  reminders: [],
+  editAction: () => {},
+  deleteAction: () => {},
+  deleteAllAction: () => {},
+  selectedDay: '',
+  goBack: () => {}
+};
+
+export default ReminderList;

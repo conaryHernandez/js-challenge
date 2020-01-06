@@ -2,6 +2,7 @@ import React from 'react';
 import { useField } from 'formik';
 import { DatePicker, Input } from 'antd';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 import classes from '../index.module.scss';
 
@@ -31,8 +32,7 @@ const CustomDatePicker = ({ label, ...props }) => {
     <div>
       <label
         htmlFor={props.id || props.name}
-        className={classes['control-label']}
-      >
+        className={classes['control-label']}>
         {label}
       </label>
 
@@ -53,6 +53,20 @@ const CustomDatePicker = ({ label, ...props }) => {
       ) : null}
     </div>
   );
+};
+
+CustomDatePicker.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
+};
+
+CustomDatePicker.defaultProps = {
+  id: '',
+  name: '',
+  label: 'Enter a Value',
+  onChange: () => {}
 };
 
 export default CustomDatePicker;

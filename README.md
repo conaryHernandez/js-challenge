@@ -2,9 +2,9 @@
 
 A cross-browser, time-management and scheduling calendar service.
 
-## Required features 6/6.
+## ✅ Required features 6/6.
 
-## Bonus Features 3/3
+## ✅ Bonus Features 3/3
 
 ## Getting Started
 
@@ -30,6 +30,10 @@ yarn start
 App starts running
 
 Open [http://localhost:3000](http://localhost:3000) to see the app.
+
+### Layout
+
+The following shows...
 
 ## Running the tests
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Modal, Form } from 'antd';
 import { Formik } from 'formik';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 import { validate } from '../../../utils/validator';
 
@@ -105,11 +106,9 @@ class ReminderModal extends Component {
           color: initialValues.color || ''
         }}
         onSubmit={(values, { setSubmitting }) =>
-          this.onSubmit(values, setSubmitting)
-        }
+          this.onSubmit(values, setSubmitting)}
         validateOnChange
-        validate={values => validate(values, this.state.rules)}
-      >
+        validate={values => validate(values, this.state.rules)}>
         {props => {
           const {
             values,
@@ -131,8 +130,7 @@ class ReminderModal extends Component {
               }}
               confirmLoading={confirmLoading}
               onCancel={handleCancel}
-              okButtonProps={{ className: 'submit-button' }}
-            >
+              okButtonProps={{ className: 'submit-button' }}>
               <Form>
                 <Input
                   label="Title"
@@ -186,5 +184,32 @@ class ReminderModal extends Component {
     );
   }
 }
+
+ReminderModal.propTypes = {
+  mode: PropTypes.string,
+  visible: PropTypes.bool,
+  confirmLoading: PropTypes.bool,
+  handleCancel: PropTypes.func,
+  handleOk: PropTypes.func,
+  addItem: PropTypes.func,
+  editItem: PropTypes.func,
+  selectedDay: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  getDateWeather: PropTypes.func,
+  getDateForecast: PropTypes.func,
+  defaultData: PropTypes.object
+};
+
+ReminderModal.defaultProps = {
+  mode: '',
+  visible: true,
+  confirmLoading: false,
+  addItem: () => {},
+  editItem: () => {},
+  handleOk: () => {},
+  handleCancel: () => {},
+  defaultData: {},
+  getDateWeather: () => {},
+  getDateForecast: () => {}
+};
 
 export default ReminderModal;

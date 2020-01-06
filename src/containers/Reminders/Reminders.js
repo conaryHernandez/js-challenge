@@ -1,10 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Typography } from 'antd';
 import moment from 'moment';
 
 import ReminderList from '../../components/Reminders/ReminderList/ReminderList';
 import ReminderModal from '../../components/Reminders/ReminderModal/ReminderModal';
 import * as actions from '../../store/actions';
+
+const { Title } = Typography;
 
 class Reminders extends Component {
   state = {
@@ -91,7 +94,11 @@ class Reminders extends Component {
   render() {
     return (
       <Fragment>
-        <h1>Your Reminders</h1>
+        <Title className="MainTitle">Your Reminders</Title>
+        <Title level={2}>
+          {moment(this.props.currentDate).format('MMMM D, YYYY')}
+        </Title>
+
         <ReminderList
           reminders={this.state.dateReminders}
           editAction={this.showReminderModal}
