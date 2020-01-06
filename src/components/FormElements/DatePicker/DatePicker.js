@@ -16,7 +16,6 @@ const CustomDatePicker = ({ label, ...props }) => {
   ];
 
   const onChange = (date, dateString) => {
-    console.log('onchage datepciker', date);
     const fakeEvent = {
       currentTarget: {
         value: date ? date.format() : '',

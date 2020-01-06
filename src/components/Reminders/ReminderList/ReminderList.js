@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Icon, Tag, Typography, Button, Card, Row, Col } from 'antd';
+import { Icon, Typography, Button, Card, Row, Col, Result } from 'antd';
 import moment from 'moment';
 
 import classes from './ReminderList.module.scss';
@@ -32,6 +32,10 @@ const ReminderTable = props => {
   };
 
   const buildReminders = () => {
+    if (props.reminders.length === 0) {
+      return <Result title="No reminders for this date :(" />;
+    }
+
     return props.reminders.map(rmd => {
       return (
         <Card
@@ -77,6 +81,14 @@ const ReminderTable = props => {
   return (
     <Fragment>
       {buildReminders()}
+      <Button
+        type="primary"
+        icon="left"
+        className={classes['delete-button']}
+        onClick={props.goBack}
+      >
+        Go Back
+      </Button>
 
       {props.reminders.length > 0 && (
         <Button

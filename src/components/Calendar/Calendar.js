@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Calendar, Badge, Tag } from 'antd';
+import { Calendar } from 'antd';
 import moment from 'moment';
 
 import classes from './Calendar.module.scss';

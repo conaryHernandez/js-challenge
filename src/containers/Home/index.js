@@ -13,6 +13,12 @@ class Home extends Component {
     selectedDay: new Date()
   };
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.reminders.length !== this.props.reminders.length) {
+      return this.props.reminders;
+    }
+  }
+
   showModal = () => {
     this.setState({
       visible: true

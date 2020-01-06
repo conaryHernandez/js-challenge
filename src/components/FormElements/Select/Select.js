@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useField } from 'formik';
 import Select from 'react-dropdown-select';
 import { List } from 'react-virtualized';
 
 import classes from '../index.module.scss';
+import './Select.module.scss';
 
 const VSelect = ({ label, ...props }) => {
   const renderOptions = ({ props, state, methods }) => {
@@ -39,7 +40,7 @@ const VSelect = ({ label, ...props }) => {
   const onChange = values => {
     const fakeEvent = {
       currentTarget: {
-        value: values[0].name,
+        value: values[0].name ? values[0].name : props.defaultValue,
         type: 'text',
         name: props.name
       }
@@ -50,7 +51,10 @@ const VSelect = ({ label, ...props }) => {
 
   const [field, meta] = useField(props);
 
-  const inputClasses = [meta.error && meta.touched ? classes.Invalid : ''];
+  const inputClasses = [
+    classes.Select,
+    meta.error && meta.touched ? classes.Invalid : ''
+  ];
 
   const errorLabelClasses = [
     meta.error && meta.touched ? classes.InvalidText : ''
@@ -78,7 +82,8 @@ const VSelect = ({ label, ...props }) => {
         {...field}
         {...props}
         onChange={onChange}
-        values={[]}
+        values={props.values.length > 0 ? [{ name: props.values }] : []}
+        value={props.value.length > 0 ? props.value : []}
       />
 
       {meta.touched && meta.error ? (

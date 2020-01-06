@@ -64,8 +64,25 @@ class ReminderModal extends Component {
     );
   };
 
+  cleanFormValues = () => {
+    return {
+      id: this.generateDummyId(),
+      title: '',
+      time: moment(),
+      date: moment(),
+      color: '',
+      city: ''
+    };
+  };
+
   render() {
-    const { confirmLoading, visible, handleCancel, defaultData } = this.props;
+    const {
+      confirmLoading,
+      visible,
+      handleCancel,
+      defaultData,
+      mode = ''
+    } = this.props;
     let initialValues = {};
 
     if (defaultData) {
@@ -80,7 +97,7 @@ class ReminderModal extends Component {
     return (
       <Formik
         initialValues={{
-          id: initialValues.id || this.generateDummyId(),
+          id: mode === 'edit' ? initialValues.id : this.generateDummyId(),
           title: initialValues.title || '',
           time: initialValues.time || moment(),
           date: initialValues.date || moment(),
@@ -99,7 +116,8 @@ class ReminderModal extends Component {
             handleReset,
             handleChange,
             handleSubmit,
-            resetForm
+            setValues
+            // resetForm
           } = props;
 
           return (
@@ -107,7 +125,10 @@ class ReminderModal extends Component {
               title="Add New Reminder"
               visible={visible}
               onOk={handleSubmit}
-              afterClose={handleReset}
+              afterClose={() => {
+                handleReset();
+                setValues(this.cleanFormValues());
+              }}
               confirmLoading={confirmLoading}
               onCancel={handleCancel}
             >
@@ -151,10 +172,10 @@ class ReminderModal extends Component {
                   name="city"
                   id="city"
                   onChange={handleChange}
-                  value={values.city}
                   label="Select a city"
                   initialData={cities}
-                  defaultValue={values.city ? [{ name: values.city }] : []}
+                  values={values.city}
+                  value={values.city}
                 />
               </Form>
             </Modal>

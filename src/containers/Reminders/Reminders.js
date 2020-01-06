@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import ReminderTable from '../../components/Reminders/ReminderList/ReminderList';
-import ReminderModal from '../../components/Reminders/ReminderModal/ReminderModal';
 import moment from 'moment';
+
+import ReminderList from '../../components/Reminders/ReminderList/ReminderList';
+import ReminderModal from '../../components/Reminders/ReminderModal/ReminderModal';
 import * as actions from '../../store/actions';
 
 class Reminders extends Component {
@@ -27,19 +28,19 @@ class Reminders extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.reminders.length !== this.props.reminders.length) {
-      this.setState({ dateReminders: this.props.reminders });
+      console.log('update?');
+      this.getDateReminders(this.props.currentDate);
     }
   }
 
   getDateReminders = date => {
+    console.log('props no han cambiando', this.props.reminders);
     const dateReminders = this.props.reminders.filter(reminder =>
       moment(reminder.date).isSame(date, 'day')
     );
 
     this.setState({ dateReminders });
   };
-
-  getSelectedReminder = () => {};
 
   showReminderModal = element => {
     this.setState({ visible: true, selectedElement: element });
@@ -63,6 +64,14 @@ class Reminders extends Component {
     }, 2000);
   };
 
+  editReminder = values => {
+    this.props.onEditReminder(values);
+
+    this.setState({ selectedElement: {} }, () => {
+      this.getDateReminders(this.props.currentDate);
+    });
+  };
+
   deleteReminder = id => {
     this.props.onDeleteReminder(id);
 
@@ -77,16 +86,21 @@ class Reminders extends Component {
     this.setState({ dateReminders: [] });
   };
 
+  goBack = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     return (
       <Fragment>
         <h1>Your Reminders</h1>
-        <ReminderTable
+        <ReminderList
           reminders={this.state.dateReminders}
           editAction={this.showReminderModal}
           deleteAction={this.deleteReminder}
           deleteAllAction={this.deleteAllItems}
           selectedDay={this.props.currentDate}
+          goBack={this.goBack}
         />
 
         {this.state.visible ? (
@@ -97,7 +111,7 @@ class Reminders extends Component {
             handleCancel={this.handleCancel}
             handleOk={this.handleOk}
             addItem={this.props.onAddReminder}
-            editItem={this.props.onEditReminder}
+            editItem={this.editReminder}
             selectedDay={this.props.currentDate}
             getDateWeather={this.props.onSetWeather}
             getDateForecast={this.props.onSetForecast}
