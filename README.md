@@ -35,35 +35,34 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 
 Once your app is running you will see the Home page of the app.
 
-(/images/home.png)
+<img src="/images/home.png" alt="Home Page">
 
-You can add remidners for a specific date and also you can see your reminders per day by clicking in a specific day in the calendar.
+You can add reminders for a specific date and also you can see your reminders per day by clicking in a specific day in the calendar.
 
-When you click the "Add Reminder" Button the following modal will appear. You can add a title to your reminder (max. 30 chars) and also pick a color, date, time and city.
+When you click the "Add Reminder" button the following modal will appear. You can add a title to your reminder (max. 30 chars) and also pick a color, date, time and city.
 The city can be selected from a Select Component which display a list of cities. A city can be searched by introducing the text in the input or selecting it from the given options.
 
 All fields are required in order to create a reminder.
 
-(/images/reminder-modal.png)
+<img src="/images/reminder-modal.png" alt="Reminder Modal">
 
 Once you create a reminder it will be displayed in the calendar as a miniature.
 
-(/images/reminder-card.png)
+<img src="/images/reminder-card.png" alt="Reminder Card">
 
 If you want to see your reminders per day you just need to click an specific day in the calendar and it will render the Reminders page of the app.
 
-(/images/reminders.png)
+<img src="/images/reminders.png" alt="Reminders">
 
 And you will see the forecast per city if is avaible for the selected date.
 
 You can edit an existing reminder by clicking the "Edit" button. You can edit any field of the reminder any times you want.
 
-(/images/reminder-edit.png)
+<img src="/images/reminder-edit.png" alt="Edit Reminder">
 
 If you there is no reminders in a specific date you will se the following message
 
-(/images/reminders-empty.png)
-
+<img src="/images/reminders-empty.png" alt="Empty Reminders">
 
 ## Running the tests
 
