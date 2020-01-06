@@ -20,7 +20,8 @@ class ReminderModal extends Component {
   state = {
     rules: {
       title: {
-        isRequired: true
+        isRequired: true,
+        maxLength: 30
       },
       color: {
         isRequired: true
@@ -37,22 +38,31 @@ class ReminderModal extends Component {
     }
   };
 
-  onSubmit = (values, setSubmitting) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 400);
+  onSubmit = (values, setSubmitting, setFieldError) => {
+    const repeteadReminder = this.props.validateNewItem(
+      values.id,
+      values.time,
+      values.date,
+      this.props.reminders
+    );
 
-    this.props.handleOk();
+    if (repeteadReminder) {
+      setFieldError(
+        'time',
+        'Already exist a reminder with the same date and time.'
+      );
 
-    if (this.props.mode === 'edit') {
-      this.props.editItem(values);
+      setSubmitting(true);
     } else {
-      this.props.addItem(values);
+      if (this.props.mode === 'edit') {
+        this.props.editItem(values);
+      } else {
+        this.props.addItem(values);
+      }
+      this.props.getDateWeather(values.city, values.id);
+      this.props.getDateForecast(values.city, values.date, values.id);
+      this.props.handleOk();
     }
-
-    this.props.getDateWeather(values.city, values.id);
-    this.props.getDateForecast(values.city, values.date, values.id);
   };
 
   // creating dummy ids because there is no BE.
@@ -105,8 +115,8 @@ class ReminderModal extends Component {
           city: initialValues.city || '',
           color: initialValues.color || ''
         }}
-        onSubmit={(values, { setSubmitting }) =>
-          this.onSubmit(values, setSubmitting)}
+        onSubmit={(values, { setSubmitting, setFieldError }) =>
+          this.onSubmit(values, setSubmitting, setFieldError)}
         validateOnChange
         validate={values => validate(values, this.state.rules)}>
         {props => {
@@ -141,7 +151,6 @@ class ReminderModal extends Component {
                   onChange={handleChange}
                   value={values.title}
                   id="title"
-                  maxLength={30}
                 />
 
                 <ColorPicker
@@ -187,6 +196,7 @@ class ReminderModal extends Component {
 }
 
 ReminderModal.propTypes = {
+  reminders: PropTypes.array,
   mode: PropTypes.string,
   visible: PropTypes.bool,
   confirmLoading: PropTypes.bool,
@@ -197,10 +207,12 @@ ReminderModal.propTypes = {
   selectedDay: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   getDateWeather: PropTypes.func,
   getDateForecast: PropTypes.func,
-  defaultData: PropTypes.object
+  defaultData: PropTypes.object,
+  validateNewItem: PropTypes.func
 };
 
 ReminderModal.defaultProps = {
+  reminders: [],
   mode: '',
   visible: true,
   confirmLoading: false,
@@ -210,7 +222,8 @@ ReminderModal.defaultProps = {
   handleCancel: () => {},
   defaultData: {},
   getDateWeather: () => {},
-  getDateForecast: () => {}
+  getDateForecast: () => {},
+  validateNewItem: () => {}
 };
 
 export default ReminderModal;

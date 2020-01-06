@@ -6,6 +6,7 @@ import moment from 'moment';
 import ReminderList from '../../components/Reminders/ReminderList/ReminderList';
 import ReminderModal from '../../components/Reminders/ReminderModal/ReminderModal';
 import * as actions from '../../store/actions';
+import { validaNewReminderDate } from '../../utils/dates';
 
 const { Title } = Typography;
 
@@ -35,22 +36,8 @@ class Reminders extends Component {
     }
   }
 
-  getDateReminders = date => {
-    const dateReminders = this.props.reminders.filter(reminder =>
-      moment(reminder.date).isSame(date, 'day')
-    );
-
-    this.setState({ dateReminders });
-  };
-
   showReminderModal = element => {
     this.setState({ visible: true, selectedElement: element });
-  };
-
-  handleCancel = () => {
-    this.setState({
-      visible: false
-    });
   };
 
   handleOk = () => {
@@ -63,6 +50,20 @@ class Reminders extends Component {
         confirmLoading: false
       });
     }, 2000);
+  };
+
+  handleCancel = () => {
+    this.setState({
+      visible: false
+    });
+  };
+
+  getDateReminders = date => {
+    const dateReminders = this.props.reminders.filter(reminder =>
+      moment(reminder.date).isSame(date, 'day')
+    );
+
+    this.setState({ dateReminders });
   };
 
   editReminder = values => {
@@ -110,6 +111,7 @@ class Reminders extends Component {
 
         {this.state.visible ? (
           <ReminderModal
+            reminders={this.props.reminders}
             mode="edit"
             visible={this.state.visible}
             confirmLoading={this.state.confirmLoading}
@@ -121,6 +123,7 @@ class Reminders extends Component {
             getDateWeather={this.props.onSetWeather}
             getDateForecast={this.props.onSetForecast}
             defaultData={this.state.selectedElement}
+            validateNewItem={validaNewReminderDate}
           />
         ) : null}
       </Fragment>

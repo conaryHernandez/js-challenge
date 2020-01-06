@@ -5,6 +5,7 @@ import { Button, Typography } from 'antd';
 import Calendar from '../../components/Calendar/Calendar';
 import ReminderModal from '../../components/Reminders/ReminderModal/ReminderModal';
 import * as actions from '../../store/actions';
+import { validaNewReminderDate } from '../../utils/dates';
 
 const { Title } = Typography;
 
@@ -27,12 +28,6 @@ class Home extends Component {
     });
   };
 
-  handleCancel = () => {
-    this.setState({
-      visible: false
-    });
-  };
-
   handleOk = () => {
     this.setState({
       confirmLoading: true
@@ -43,6 +38,12 @@ class Home extends Component {
         confirmLoading: false
       });
     }, 2000);
+  };
+
+  handleCancel = () => {
+    this.setState({
+      visible: false
+    });
   };
 
   redirectToRemindersPage = date => {
@@ -72,6 +73,7 @@ class Home extends Component {
         />
 
         <ReminderModal
+          reminders={this.props.reminders}
           handleCancel={this.handleCancel}
           handleOk={this.handleOk}
           addItem={this.props.onAddReminder}
@@ -80,6 +82,7 @@ class Home extends Component {
           selectedDay={this.state.selectedDay}
           getDateWeather={this.props.onSetWeather}
           getDateForecast={this.props.onSetForecast}
+          validateNewItem={validaNewReminderDate}
         />
       </Fragment>
     );
