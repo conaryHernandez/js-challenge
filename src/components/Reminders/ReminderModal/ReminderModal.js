@@ -128,6 +128,7 @@ class ReminderModal extends Component {
                 handleReset();
                 setValues(this.cleanFormValues());
               }}
+              destroyOnClose
               confirmLoading={confirmLoading}
               onCancel={handleCancel}
               okButtonProps={{ className: 'submit-button' }}>
