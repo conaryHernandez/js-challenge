@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useField } from 'formik';
 import Select from 'react-dropdown-select';
 import { List } from 'react-virtualized';

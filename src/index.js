@@ -1,3 +1,6 @@
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -16,9 +19,9 @@ import * as serviceWorker from './serviceWorker';
 import remindersReducer from './store/reducers/reminders';
 
 const composeEnhancers =
-  process.env.NODE_ENV === 'development'
+  (process.env.NODE_ENV === 'development'
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    : null || compose;
+    : null) || compose;
 
 const rootReducer = combineReducers({
   rmd: remindersReducer
