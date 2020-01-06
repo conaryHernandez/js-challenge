@@ -2,13 +2,13 @@
 
 A cross-browser, time-management and scheduling calendar service.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
 ## Required features 6/6.
 
 ## Bonus Features 3/3
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
@@ -37,45 +37,21 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 yarn test
 ```
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Run **yarn build** in order to create a build folder with the compiled assets ready to deploy to your server.
+
+```
+yarn build
+```
 
 ## Built With
 
-- [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-- [Maven](https://maven.apache.org/) - Dependency Management
-- [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
-
-## Authors
-
-- **Billie Thompson** - _Initial work_ - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+- [React](https://reactjs.org/) - The Web Framework.
+- [Redux](https://react-redux.js.org/) - The Sate Management library.
+- [Yarn](https://yarnpkg.com) - Dependency Management
+- [Antd](https://rometools.github.io/rome/) - Used to create UI Elements
+- [Formik](https://jaredpalmer.com/formik) - Used to create Form Elements
 
 ## License
 
@@ -83,6 +59,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
+- Kyle Simpson
+- Dan Abramov
