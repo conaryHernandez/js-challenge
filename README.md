@@ -31,6 +31,20 @@ App starts running
 
 Open [http://localhost:3000](http://localhost:3000) to see the app.
 
+## Running the tests
+
+```
+yarn test
+```
+
+## Deployment
+
+Run **yarn build** in order to create a build folder with the compiled assets ready to deploy to your server.
+
+```
+yarn build
+```
+
 ### Layout
 
 Once your app is running you will see the Home page of the app.
@@ -63,20 +77,6 @@ You can edit an existing reminder by clicking the "Edit" button. You can edit an
 If you there is no reminders in a specific date you will se the following message
 
 <img src="/images/reminders-empty.png" alt="Empty Reminders">
-
-## Running the tests
-
-```
-yarn test
-```
-
-## Deployment
-
-Run **yarn build** in order to create a build folder with the compiled assets ready to deploy to your server.
-
-```
-yarn build
-```
 
 ## Built With
 
